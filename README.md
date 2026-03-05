@@ -4,18 +4,11 @@ CLI that converts a URL to clean markdown. Outputs to stdout.
 
 ## Install
 
-Requires .NET 10 SDK and Chrome or Edge.
-
 ```bash
-git clone https://github.com/fifthsegment/distill.git
-cd distill
-dotnet publish -c Release -r osx-arm64    # macOS ARM
-dotnet publish -c Release -r osx-x64      # macOS Intel
-dotnet publish -c Release -r linux-x64    # Linux
-dotnet publish -c Release -r win-x64      # Windows
+curl -sfL https://raw.githubusercontent.com/fifthsegment/distill/main/install.sh | bash
 ```
 
-Binary: `bin/Release/net10.0/<rid>/publish/distill`
+Installs to `~/.local/bin`. Set `DISTILL_INSTALL_DIR` to change. Requires Chrome or Edge installed.
 
 ## MCP configuration
 
@@ -23,7 +16,7 @@ Binary: `bin/Release/net10.0/<rid>/publish/distill`
 {
   "mcpServers": {
     "distill": {
-      "command": "/absolute/path/to/distill",
+      "command": "~/.local/bin/distill",
       "args": ["--stdin"]
     }
   }
