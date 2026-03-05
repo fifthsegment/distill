@@ -34,8 +34,9 @@ jobs:
         shell: bash
         run: |
           VERSION=$(cat VERSION | tr -d '[:space:]')
+          OUTDIR="$(pwd)"
           cd bin/Release/net10.0/${{ matrix.rid }}/publish
-          tar czf "$GITHUB_WORKSPACE/distill-${VERSION}-${{ matrix.rid }}.tar.gz" .
+          tar czf "${OUTDIR}/distill-${VERSION}-${{ matrix.rid }}.tar.gz" .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
