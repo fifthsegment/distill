@@ -1,3 +1,4 @@
+using System.Reflection;
 using Distill.Cdp;
 using Distill.Pipeline;
 
@@ -235,6 +236,10 @@ static CliOptions ParseArgs(string[] args)
                 break;
             case "--stdin":
                 opts.ReadStdin = true;
+                break;
+            case "--version":
+                Console.WriteLine(typeof(CliOptions).Assembly.GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "unknown");
+                Environment.Exit(0);
                 break;
             case "-h" or "--help":
                 PrintUsage();
