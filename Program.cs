@@ -2,6 +2,13 @@ using System.Reflection;
 using Distill.Cdp;
 using Distill.Pipeline;
 
+if (args.Contains("--mcp"))
+{
+    await using var mcp = new Distill.McpServer();
+    await mcp.RunAsync();
+    return 0;
+}
+
 var options = ParseArgs(args);
 
 if (options.Urls.Count == 0)

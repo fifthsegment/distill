@@ -1,6 +1,6 @@
 # Distill
 
-CLI that converts a URL to clean markdown. Outputs to stdout.
+CLI that converts a URL to clean markdown. Outputs to stdout. Runs as an MCP server with `--mcp`.
 
 ## Install
 
@@ -17,15 +17,24 @@ Installs to `~/.local/bin`. Set `DISTILL_INSTALL_DIR` to change. Requires Chrome
   "mcpServers": {
     "distill": {
       "command": "~/.local/bin/distill",
-      "args": ["--stdin"]
+      "args": ["--mcp"]
     }
   }
 }
 ```
 
-With `--stdin`, send one URL per line on stdin. Output is markdown on stdout. Errors go to stderr.
+This starts Distill as a JSON-RPC 2.0 MCP server over stdio. It exposes one tool:
 
-## Options
+**`distill`** — Convert a web page URL to clean, LLM-ready markdown.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `url` | string | yes | The URL to convert |
+| `render` | boolean | no | Force browser rendering for JS-heavy pages |
+| `visible` | boolean | no | Launch Chrome visibly to bypass headless detection |
+| `profile` | string | no | Path to Chrome profile directory |
+
+## CLI usage
 
 ```
 distill <url> [options]
@@ -40,6 +49,7 @@ distill <url> [options]
 --browser <path>  Path to Chrome/Edge binary
 --cdp <ws-url>    Connect to an already-running Chrome DevTools endpoint
 --stdin           Read URLs from stdin, one per line
+--mcp             Run as MCP server (JSON-RPC over stdio)
 --version         Print version and exit
 ```
 
